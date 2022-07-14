@@ -1,0 +1,25 @@
+crawling_list:
+- CNN:
+    main_url: https://edition.cnn.com/
+    # main page
+    main_category_tag: a
+    main_category_class: sc-fjdhpX sc-chPdSV hnOkcW
+    main_subcategory_tag: a
+    main_subcatergory_class: sc-fjdhpX sc-kpOJdX cgygcP
+
+    # category/subcategory
+    cat_post_tag: div
+    cat_post_class: cd__content
+    subcat_post_tag: div
+    subcat_post_class: cd__content
+
+    # article
+    article_title_tag: h1
+    article_title_class: pg-headline
+    article_metadata_tag: div
+    article_metadata_class: metadata
+    article_metadata_author_tag: p
+    article_metadata_author_class: metadata__byline__author
+    article_metadata_datetime_tag: p
+    article_metadata_datetime_class: update-time
+    
