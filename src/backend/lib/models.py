@@ -11,7 +11,7 @@ class Article:
         self._category = category
         self._author_id = author_id
         self._author_fullname = author_fullname
-        self._content = content # content is a list of dict [{'type':'text', 'content':''}, {'type':'image', 'link':'url'}]
+        self._content = content
     
     
     def get_id(self):
