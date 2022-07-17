@@ -10,9 +10,13 @@
 - Run Scraping:
   - Run `python scraping_main.py`
 
+- NLP analysis:
+  - `NLP Analysis.ipynb`
+
 ## 2. Scraper
 ### 2.1. Tools
 - Get site's html content (in priority order): requests, selenium (Firefox driver)
+- Scraping html: BeautifulSoup
 
 ### 2.1. Strategy
 
@@ -39,13 +43,14 @@ Generalize to scraping from more news sites.
 ## 3. Database
 - Type: postgresql 
 - Host: AWS RDS db.t3.micro
+- Credentials: put file `db_config.json` under `src/backend/`.
 
 ## 4. Project Structure
 - `src/backend/input/`: input/setting files.
 - `src/backend/lib/`: code for main features: scrapping, database, ...
-- `webdriver/`: web driver for selenium
+- `webdriver/`: download and put webdriver for Firefox here
 - `scrapper.ipynb`: notebook for scrapping
-- `RDS.ipynb`: notebook for database
+- `NLP Analysis.ipynb.ipynb`: notebook for NPL analysis
 
 
 ## TODO
@@ -55,10 +60,13 @@ Generalize to scraping from more news sites.
 - [x] Logging
 - [x] Clean, map and push scraping data to DB
 - Analyse data
-  - [ ] Sentimental
+  - [x] Sentimental
   - [ ] Statistical 
   - [ ] Relationship
+  - [ ] Named Entity Recognition
+  - [ ] Topic clustering
 - [ ] Generalize scraping strategy
 - [ ] Create install file
+- [ ] Functions to update analysis label to DB
 
 
