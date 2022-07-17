@@ -1,6 +1,5 @@
-crawling_list:
-- CNN:
-    main_url: https://edition.cnn.com/
+CNN:
+    main_url: https://edition.cnn.com
     # main page
     main_category_tag: a
     main_category_class: sc-fjdhpX sc-chPdSV hnOkcW
@@ -18,8 +17,9 @@ crawling_list:
     article_title_class: pg-headline
     article_metadata_tag: div
     article_metadata_class: metadata
-    article_metadata_author_tag: p
+    article_metadata_author_tag: span
     article_metadata_author_class: metadata__byline__author
     article_metadata_datetime_tag: p
     article_metadata_datetime_class: update-time
-    
+    article_text_tag: div
+    article_text_class: zn-body__paragraph
