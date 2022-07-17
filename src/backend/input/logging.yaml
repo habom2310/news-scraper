@@ -12,19 +12,19 @@ handlers:
     console:
         class: logging.StreamHandler
         level: DEBUG
-        formatter: simple
+        formatter: complex
 
     file:
         class: logging.handlers.TimedRotatingFileHandler
         when: midnight
         backupCount: 5
         level: DEBUG
-        formatter: simple
+        formatter: complex
         filename : scraping.log
 
 loggers:
 
-    other:
+    scraper:
         level: INFO
         handlers: [console,file]
         propagate: yes

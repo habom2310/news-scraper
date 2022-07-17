@@ -1,20 +1,16 @@
-from config import WebConfig
-from browser import Browser
-from models import Article
-from postgresql_client import PostgresClient
-import utils
+from src.backend.lib.config import WebConfig
+from src.backend.lib.browser import Browser
+from src.backend.lib.models import Article
+from src.backend.lib.postgresql_client import PostgresClient
+import src.backend.lib.utils as utils
 
 from bs4 import BeautifulSoup
-import requests
-import re
-from selenium import webdriver
 import logging
-import json
 # import random
 
 class Scraper():
     def __init__(self, webname):
-        self.logger = logging.getLogger(__name__)
+        self.logger = logging.getLogger("scraper")
         self._browser = Browser(fast_load=False)
         self._web_config = WebConfig(webname)
         self._db = PostgresClient()
@@ -27,7 +23,7 @@ class Scraper():
         if not source_html:
             return None
 
-        self.logger.info("[INFO] Scraping categories and sub-categories ...")
+        self.logger.info("[Scraper] Scraping categories and sub-categories ...")
         soup = BeautifulSoup(source_html, "html.parser")
 
         main_category_tag = self._web_config.get_main_category_tag()
@@ -52,15 +48,17 @@ class Scraper():
         cat_post_tag = self._web_config.get_cat_post_tag()
         cat_post_class = self._web_config.get_cat_post_class()
         
-        if list_article := soup.find_all(cat_post_tag, class_=cat_post_class):
-            list_article_url = [a.find("a")["href"] for a in list_article]
-        else: return None
+        list_article = soup.find_all(cat_post_tag, class_=cat_post_class)
+        list_article_url = []
+        if len(list(list_article))>0:
+            list_article_url = [a.find("a").get("href") for a in list_article]
 
         self.logger.info(f"[Scraper] Scraping from {url}: found {len(list_article)} articles")
 
         return list_article_url
 
     def scraping_article_page(self, url, use_selenium=True):
+        self.logger.info(f"[Scraper] Scraping from {url}")
         source_html = self._browser.load_page(self._web_config.get_main_url() + url, use_selenium=False)
         if not source_html:
             return None
@@ -147,18 +145,3 @@ class Scraper():
                     )
 
                     self._db.push_article(new_article)
-
-
-import logging.config
-import logging
-import yaml
-
-with open('src/backend/input/logging.yaml','r') as f:
-        config=yaml.safe_load(f.read())
-        f.close()
-logging.config.dictConfig(config)
-logger=logging.getLogger(__name__)
-logger.info("unit test")
-if __name__=="__main__":
-    s = Scraper("CNN")
-    s.scraping_process()

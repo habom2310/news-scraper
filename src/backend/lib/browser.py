@@ -9,6 +9,7 @@ class Browser:
         options = Options()
         # options.add_argument("--headless")
         profile= webdriver.FirefoxProfile()
+        self.logger = logging.getLogger()
 
         if fast_load==True:
             profile.set_preference('permissions.default.stylesheet', 2)
@@ -39,7 +40,7 @@ class Browser:
                 self._driver.get(url)
                 return self._driver.page_source
             except:
-                logging.exception("Time out")
+                self.logger.exception("Time out")
                 self._has_error = True
                 return None
         else:
@@ -48,7 +49,7 @@ class Browser:
                 return self._request.content
 
             except:
-                logging.exception("Time out")
+                self.logger.exception("Time out")
                 self._has_error = True
                 return None
 

@@ -1,15 +1,19 @@
 # News Scraper 
 
-## 1. Project structure
-- `src/backend/input/`: input/setting files.
-- `src/backend/lib/`: code for main features: scrapping, database, ...
-- `webdriver/`: web driver for selenium
-- `scrapper.ipynb`: notebook for scrapping
-- `RDS.ipynb`: notebook for database
+
+## 1. How to run
+- Requirements:
+  - Python 3.8 environment
+  - Install required packages: `pip install -r requirements.txt`
+  - Firefox, webdriver for Firefox (geckodriver) https://github.com/mozilla/geckodriver/releases
+  - Put file `df_config.json` under `src/backend` for DB credentials
+
+- Run Scraping:
+  - Run `python -m src/scraping_main.py`
 
 ## 2. Scraper
-- Library: selenium, requests, BeautifulSoup
-- Target: CNN (url: https://edition.cnn.com/). 
+### 2.1. Tools
+- Get site's html content (in priority order): requests, selenium (Firefox driver)
 
 ### 2.1. Strategy
 
@@ -37,19 +41,25 @@ Generalize to scraping from more news sites.
 - Type: postgresql 
 - Host: AWS RDS db.t3.micro
 
-### Structure
+## 4. Project Structure
+- `src/backend/input/`: input/setting files.
+- `src/backend/lib/`: code for main features: scrapping, database, ...
+- `webdriver/`: web driver for selenium
+- `scrapper.ipynb`: notebook for scrapping
+- `RDS.ipynb`: notebook for database
 
 
 ## TODO
 - [x] Create Postgresql Database in AWS
 - [x] Code to scraping articles from CNN
-- [ ] Define DB structure
-- [ ] Map and push scraping data to DB
+- [x] Define DB structure
+- [x] Logging
+- [x] Clean, map and push scraping data to DB
 - Analyse data
   - [ ] Sentimental
   - [ ] Statistical 
   - [ ] Relationship
 - [ ] Generalize scraping strategy
 - [ ] Create install file
-- [ ] Logging
+
 

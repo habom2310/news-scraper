@@ -22,7 +22,7 @@ import re
 # consoleHandler.setFormatter(logFormatter)
 # rootLogger.addHandler(consoleHandler)
 
-logger = logging.getLogger(__name__)
+logger = logging.getLogger("scraper")
 
 def get_utc_now_date():
     return pytz.utc.localize(datetime.utcnow())
@@ -49,6 +49,9 @@ def validate_article_url(url):
         valid = False
         
     if "/live-news/" in url:
+        valid = False
+
+    if "/gallery/" in url: # only has pictures
         valid = False
         
     return valid

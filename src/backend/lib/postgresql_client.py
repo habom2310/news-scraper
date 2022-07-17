@@ -1,4 +1,3 @@
-from ast import keyword
 from sqlalchemy import Integer, Text, create_engine
 from sqlalchemy import Column, String, Date
 from sqlalchemy.ext.declarative import declarative_base
@@ -42,7 +41,7 @@ class PostgresClient():
         self.engine = create_engine(self.db_string)
         self.Session = sessionmaker(bind=self.engine)
         Base.metadata.create_all(self.engine) # create table if they not exist
-        self.logger = logging.getLogger(__name__)
+        self.logger = logging.getLogger("scraper")
 
     @contextmanager
     def get_session(self):

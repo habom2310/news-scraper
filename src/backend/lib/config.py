@@ -1,12 +1,9 @@
-import yaml
-from datetime import datetime
-import os
-import utils
+import src.backend.lib.utils as utils
 
 class WebConfig:
     def __init__(self, webname):
         self._webname = webname
-        self._web = utils.load_config_file(r"src\backend\config\data.yaml")[webname]
+        self._web = utils.load_config_file(r"src\backend\input\data.yaml")[webname]
 
     def get_config(self, key, default=""):
         if key not in self._web.keys():
