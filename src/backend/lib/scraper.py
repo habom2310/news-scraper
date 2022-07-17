@@ -51,7 +51,9 @@ class Scraper():
         list_article = soup.find_all(cat_post_tag, class_=cat_post_class)
         list_article_url = []
         if len(list(list_article))>0:
-            list_article_url = [a.find("a").get("href") for a in list_article]
+            for a in list_article:
+                if a_div := a.find("a"):
+                    list_article_url.append(a_div.get("href"))
 
         self.logger.info(f"[Scraper] Scraping from {url}: found {len(list_article)} articles")
 
@@ -137,6 +139,7 @@ class Scraper():
                         # article_id=random.randint(0,100000),
                         href = article.get("article_url"),
                         title = article.get("title"),
+                        category = cat.get("category_name"),
                         date = article.get("update_time"),
                         newspaper = self._web_config.get_webname(),
                         author_id = article.get("author_id", ""),

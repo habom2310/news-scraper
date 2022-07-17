@@ -1,15 +1,14 @@
 # News Scraper 
 
-
 ## 1. How to run
 - Requirements:
-  - Python 3.8 environment
+  - Python > 3.8 environment
   - Install required packages: `pip install -r requirements.txt`
-  - Firefox, webdriver for Firefox (geckodriver) https://github.com/mozilla/geckodriver/releases
+  - Firefox + webdriver for Firefox (geckodriver) https://github.com/mozilla/geckodriver/releases
   - Put file `df_config.json` under `src/backend` for DB credentials
 
 - Run Scraping:
-  - Run `python -m src/scraping_main.py`
+  - Run `python scraping_main.py`
 
 ## 2. Scraper
 ### 2.1. Tools
