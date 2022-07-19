@@ -31,9 +31,9 @@ class WebConfig:
         return self.get_config("main_category_class")
 
     def get_main_subcategory_tag(self):
-        return self.get_config("main_subcatergory_tag")
+        return self.get_config("main_subcategory_tag")
     def get_main_subcatergory_class(self):
-        return self.get_config("main_subcatergory_class")
+        return self.get_config("main_subcategory_class")
 
     def get_cat_post_tag(self):
         return self.get_config("cat_post_tag")

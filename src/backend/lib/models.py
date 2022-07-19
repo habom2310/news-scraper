@@ -13,7 +13,6 @@ class Article:
         self._author_fullname = author_fullname
         self._content = content
     
-    
     def get_id(self):
         return self._id
     

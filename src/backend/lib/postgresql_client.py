@@ -91,7 +91,6 @@ class PostgresClient():
                 self.logger.exception("[DB] commit error!")
                 return False
 
-        
     def get_sample_articles(self):
         with self.get_session() as sess:
             for article in sess.query(Postgres_Article):
