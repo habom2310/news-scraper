@@ -4,6 +4,7 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 import logging
 from contextlib import contextmanager
+import pandas as pd
 import json
 
 with open('src/backend/db_config.json') as f:
@@ -42,6 +43,11 @@ class PostgresClient():
         self.Session = sessionmaker(bind=self.engine)
         Base.metadata.create_all(self.engine) # create table if they not exist
         self.logger = logging.getLogger("scraper")
+        self._existed_article_urls = self.get_all_article_urls()
+        if len(self._existed_article_urls) > 0:
+            self._has_existed_articles = True
+        else:
+            self._has_existed_articles = False
 
     @contextmanager
     def get_session(self):
@@ -57,6 +63,11 @@ class PostgresClient():
             session.close()
         
     def push_article(self, article):
+        if self._has_existed_articles:
+            if article.get_href() in self._existed_article_urls:
+                self.logger.info("[DB] Article already existed in DB")
+                return False
+
         new_article = Postgres_Article(
             # article_id = article.get_id(),
             title = article.get_title(),
@@ -73,8 +84,12 @@ class PostgresClient():
             sess.add(new_article)
             try:
                 sess.commit()
+                self.logger.info("[DB] article successfully saved")
+                self._existed_article_urls.append(article.get_href())
+                return True
             except Exception as e:
-                self.logger.exception("DB commit error!")
+                self.logger.exception("[DB] commit error!")
+                return False
 
         
     def get_sample_articles(self):
@@ -91,4 +106,11 @@ class PostgresClient():
                 input("Press Enter to print next article !")
                 print()
             
+    def get_all_article_urls(self):
+        with self.get_session() as sess:
+            df = pd.read_sql(sess.query(Postgres_Article.href).statement, sess.bind)
 
+        if len(df)>0:
+            return list(df["href"])
+        else:
+            return []

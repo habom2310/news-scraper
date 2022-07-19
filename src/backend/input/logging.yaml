@@ -20,7 +20,7 @@ handlers:
         backupCount: 5
         level: DEBUG
         formatter: complex
-        filename : scraping.log
+        filename : logs/scraping.log
 
 loggers:
 

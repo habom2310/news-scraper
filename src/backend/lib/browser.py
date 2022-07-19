@@ -9,7 +9,7 @@ class Browser:
         options = Options()
         # options.add_argument("--headless")
         profile= webdriver.FirefoxProfile()
-        self.logger = logging.getLogger()
+        self.logger = logging.getLogger("scraper")
 
         if fast_load==True:
             profile.set_preference('permissions.default.stylesheet', 2)

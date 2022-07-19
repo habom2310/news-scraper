@@ -34,7 +34,7 @@ Generalize to scraping from more news sites.
 
 #### Example: 
 - `main_category_tag: a`: in the main site, tag of category is `a`
-- `main_category_class: sc-fjdhpX sc-chPdSV hnOkcW`: in the main site, class name of the category is `sc-fjdhpX sc-chPdSV hnOkcW`
+- `main_category_class: sc-fjdhpX sc-chPdSV hnOkcW`: in the main site, class of the category is `sc-fjdhpX sc-chPdSV hnOkcW`
 - `article_title_tag: h1`: in the article site, tag of title is `h1`
 
 **Notes**: make sure values for tag and class name are unique.
